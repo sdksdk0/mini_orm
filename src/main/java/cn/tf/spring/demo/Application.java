@@ -20,7 +20,7 @@ public class Application {
     private MemberDao memberDao;
 
     @Test
-    public void test(){
+    public void test() throws Exception {
         List<Member>  list =  memberDao.selectListByName("小明");
         System.out.println(Arrays.toString(list.toArray()));
 

@@ -92,6 +92,7 @@ public final class QueryRule implements Serializable {
         return this;
     }
 
+
     public QueryRule andBetween(String propertyName, Object... values) {
         this.ruleList.add(new Rule(BETWEEN, propertyName, values).setAndOr(AND));
         return this;

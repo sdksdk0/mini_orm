@@ -23,10 +23,8 @@ public class MemberDao extends BaseDaoSupport<Member,Long> {
 
     public MemberDao() throws Exception {
     }
-    public List<Member> selectAll() {
-        QueryRule queryRule =  QueryRule.getInstance();
-        queryRule.getRuleList();
-        return super.select(queryRule);
+    public List<Member> selectAll() throws Exception {
+        return super.getAll();
     }
 
     public List<Member> selectListByName(String name) {
