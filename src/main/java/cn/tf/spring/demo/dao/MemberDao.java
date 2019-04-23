@@ -13,30 +13,40 @@ import java.util.List;
 
 
 @Repository
-public class MemberDao extends BaseDaoSupport<Member,Long> {
+public  class MemberDao extends BaseDaoSupport<Member,Long> {
 
-    @Autowired
-    private void setDataSource(DataSource dataSource) {
-        super.setReadonlyDataSource(dataSource);
-        super.setWriteDataSource(dataSource);
+    @Resource(name="dataSource")
+    public void setDataSource(DataSource dataSource){
+        super.setDataSourceReadOnly(dataSource);
+        super.setDataSourceWrite(dataSource);
     }
-
     public MemberDao() throws Exception {
     }
-    public List<Member> selectAll() throws Exception {
-        return super.getAll();
+
+    @Override
+    protected String getPKColumn() {
+        return "id";
     }
 
-    public List<Member> selectListByName(String name) {
+    public List<Member> selectAll() throws Exception {
+        QueryRule queryRule = QueryRule.getInstance();
+        return super.select(queryRule);
+    }
+
+    public List<Member> selectListByName(String name) throws Exception {
         QueryRule queryRule = QueryRule.getInstance();
         queryRule.andEqual("name", name);
         return super.select(queryRule);
     }
 
-    public List<Member> selectListBetween(String type,int min,int max) {
+    public List<Member> selectListBetween(String type,int min,int max) throws Exception {
         QueryRule queryRule = QueryRule.getInstance();
         queryRule.andBetween(type,min,max);
         return super.select(queryRule);
+    }
+
+    public boolean insert(Member m) throws Exception {
+        return super.insert(m);
     }
 
 }

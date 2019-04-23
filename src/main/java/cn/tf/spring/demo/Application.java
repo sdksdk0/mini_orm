@@ -27,8 +27,15 @@ public class Application {
         List<Member>  list1 =  memberDao.selectAll();
         System.out.println(Arrays.toString(list1.toArray()));
 
-/*        List<Member>  list2 =  memberDao.selectListBetween("age",20,25);
-        System.out.println(Arrays.toString(list2.toArray()));*/
+        List<Member>  list2 =  memberDao.selectListBetween("age",20,25);
+        System.out.println(Arrays.toString(list2.toArray()));
+
+        Member member = new Member();
+        member.setAddr("aa");
+        member.setAge(30);
+        member.setName("王明");
+        memberDao.insert(member);
+
 
     }
 }
